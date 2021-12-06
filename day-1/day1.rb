@@ -9,7 +9,6 @@ def countIncreases (numArr)
 end
 
 def sumThrees (numArr)
-
 	sums = []
 
 	for i in 0..numArr.length-3
