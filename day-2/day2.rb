@@ -1,18 +1,33 @@
-instructions = File.readlines('input.txt', chomp: true)
+input = File.readlines('input.txt', chomp: true)
 
-instructions.map!{|x| x.split(' ')}
+# splitting input into word and number in separate elements
+input.map!{|line| line.split(' ')}
 
-horizontal = 0
-depth = 0
+# converting each number to an integer and keeping strings intact
+# .to_i on a string returns 0 and we know there are no 0 numbers in the input
+input.each do |line|
+	line.map!{|ele| ele.to_i == 0 ? ele : ele.to_i }
+end
+
+# making an array of hashes
+steps = []
+input.each do |line|
+	steps << Hash[command: line[0],
+								  value: line[1]]
+end
+
+x = 0
+y = 0
 aim = 0
 
-instructions.each do |step|
-	num = step[1].to_i
+steps.each do |step|
+	num     = step[:value]
+	command = step[:command]
 
-	case step[0]
+	case command
 	when 'forward'
-		horizontal += num * aim
-		depth += num
+		x += num * aim
+		y += num
 	when 'down'
 		aim += num
 	when 'up'
@@ -20,7 +35,7 @@ instructions.each do |step|
 	end
 end
 
-puts "Final distance: " + horizontal.to_s
-puts "Final depth: " + depth.to_s
+puts "Final distance: " + x.to_s
+puts "Final depth: " + y.to_s
 
-puts "Multiplied: " + (depth*horizontal).to_s
+puts "Multiplied: " + (y*x).to_s
