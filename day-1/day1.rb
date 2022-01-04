@@ -1,21 +1,9 @@
-def countIncreases (numArr)
-	count = 0
-	for i in 1..numArr.length-1
-		if numArr[i] > numArr[i-1]
-			count += 1
-		end
-	end
-	count
+def countIncreases (num_arr)
+	num_arr.each_cons(2).count {|x| x[1] > x[0]} 
 end
 
-def sumThrees (numArr)
-	sums = []
-
-	for i in 0..numArr.length-3
-		sums << numArr[i] + numArr[i+1] + numArr[i+2]
-	end
-
-	sums 
+def sumThrees (num_arr)
+  num_arr.each_cons(3).map(&:sum)
 end
 
 measurements = File.readlines('input.txt', chomp: true).map!(&:to_i)
@@ -23,7 +11,7 @@ measurements = File.readlines('input.txt', chomp: true).map!(&:to_i)
 puts "Total number of readings: " + measurements.length.to_s
 puts "Number of increases: " + countIncreases(measurements).to_s
 
-summedMeasurements = sumThrees(measurements)
+sums = sumThrees(measurements)
 
-puts "Total number of summed readings: " + summedMeasurements.length.to_s
-puts "Number of increaes in summed measurements: " + countIncreases(summedMeasurements).to_s
+puts "Total number of summed readings: " + sums.length.to_s
+puts "Number of increase in summed measurements: " + countIncreases(sums).to_s
