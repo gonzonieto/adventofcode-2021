@@ -1,6 +1,6 @@
 def cycle_days(fish, days)
 	day_count = 0
-	fish_array = [0] * 9
+	fish_array = Array.new(9, 0)
 
 	fish.each do |f|
 		fish_array[f] += 1
@@ -8,7 +8,7 @@ def cycle_days(fish, days)
 
 	# Each execution of this loop represents one day
 	loop do
-		new_fish_array = [0] * 9
+		new_fish_array = Array.new(9, 0)
 
 		fish_array[7] += fish_array[0]
 
